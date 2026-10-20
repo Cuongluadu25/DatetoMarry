@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>A Little World for Giang · 20.10</title>
+  <meta name="description" content="Một món quà nhỏ, một góc nhỏ thật dịu dàng — dành riêng cho Giang nhân ngày Phụ nữ Việt Nam 20/10." />
+  <meta name="theme-color" content="#fff9f5" />
+  <meta name="color-scheme" content="light" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="A Little World for Giang · 20.10" />
+  <meta property="og:description" content="Thế giới ngoài kia có thể rất rộng, nhưng hôm nay Cường muốn dành riêng một góc nhỏ thật dịu dàng cho Giang." />
+  <meta property="og:image" content="assets/hero-sky.jpg" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="assets/fonts/cormorant-garamond-300-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/cormorant-garamond-300-normal-vietnamese.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/be-vietnam-pro-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" as="image" href="assets/hero-sky.webp"
+        imagesrcset="assets/hero-sky-800.webp 800w, assets/hero-sky-1200.webp 1200w, assets/hero-sky.webp 1600w"
+        imagesizes="100vw" fetchpriority="high" />
+  <link rel="stylesheet" href="assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#welcome">Đi thẳng đến lời chúc</a>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <canvas class="petals" id="petalsCanvas" aria-hidden="true"></canvas>
+
+  <nav class="chapter-rail" aria-label="Các chương của món quà">
+    <a class="chapter-rail__link is-active" href="#top" data-rail="top">
+      <span class="chapter-rail__label">Mở đầu</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#welcome" data-rail="welcome">
+      <span class="chapter-rail__label">20 · 10</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#gallery" data-rail="gallery">
+      <span class="chapter-rail__label">Khoảnh khắc</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#wishes" data-rail="wishes">
+      <span class="chapter-rail__label">Lời ước</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#open-when" data-rail="open-when">
+      <span class="chapter-rail__label">Mở khi</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#letter" data-rail="letter">
+      <span class="chapter-rail__label">Lá thư</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+    <a class="chapter-rail__link" href="#finale" data-rail="finale">
+      <span class="chapter-rail__label">Kết</span>
+      <span class="chapter-rail__dot"></span>
+    </a>
+  </nav>
+
+  <main>
+    <!-- ─────────────────────────────  HERO  ───────────────────────────── -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero__media" aria-hidden="true">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/hero-sky-800.webp 800w, assets/hero-sky-1200.webp 1200w, assets/hero-sky.webp 1600w"
+                  sizes="100vw" />
+          <img src="assets/hero-sky.jpg"
+               srcset="assets/hero-sky-800.jpg 800w, assets/hero-sky-1200.jpg 1200w, assets/hero-sky.jpg 1600w"
+               sizes="100vw" width="1600" height="2402" alt="" fetchpriority="high" decoding="async" />
+        </picture>
+      </div>
+      <div class="hero__veil" aria-hidden="true"></div>
+      <div class="hero__bokeh" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hero__rose hero__rose--left" aria-hidden="true"></div>
+      <div class="hero__rose hero__rose--right" aria-hidden="true"></div>
+      <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
+
+      <div class="hero__top">
+        <span class="micro">A little world</span>
+        <span class="micro hero__top-mid">for Giang</span>
+        <span class="micro">20 · 10 · 2026</span>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow">
+          <span class="hairline" aria-hidden="true"></span>
+          A LITTLE GIFT, JUST FOR YOU
+          <span class="hairline" aria-hidden="true"></span>
+        </p>
+
+        <h1 class="hero__name" id="heroTitle" aria-label="Giang">
+          <span class="hero__letter" aria-hidden="true" style="--i:0">G</span><span class="hero__letter" aria-hidden="true" style="--i:1">I</span><span class="hero__letter" aria-hidden="true" style="--i:2">A</span><span class="hero__letter" aria-hidden="true" style="--i:3">N</span><span class="hero__letter" aria-hidden="true" style="--i:4">G</span>
+        </h1>
+
+        <svg class="hero__flourish" viewBox="0 0 320 24" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="flourishGold" x1="0" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#d9b77e" stop-opacity="0" />
+              <stop offset=".25" stop-color="#d9b77e" stop-opacity=".8" />
+              <stop offset=".75" stop-color="#d9b77e" stop-opacity=".8" />
+              <stop offset="1" stop-color="#d9b77e" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path pathLength="1" d="M4 13c48-10 84 7 126 2 36-4 62-12 94-4 28 7 55 9 92-2" stroke="url(#flourishGold)" stroke-width="1.1" stroke-linecap="round" />
+          <circle cx="160" cy="11.5" r="2.2" fill="#d9b77e" fill-opacity=".85" />
+        </svg>
+
+        <p class="hero__sub">Có một món quà nhỏ Cường muốn dành riêng cho Giang...</p>
+
+        <div class="hero__cta-wrap">
+          <button class="btn btn--gift" id="openGift" type="button">
+            <span class="btn__label">Mở món quà của Giang</span>
+            <span class="btn__heart" aria-hidden="true">♡</span>
+          </button>
+          <span class="hero__scribble script" aria-hidden="true">for you, always</span>
+        </div>
+      </div>
+
+      <div class="hero__bottom">
+        <span class="hero__side micro">Happy Women’s Day</span>
+        <a class="scroll-cue" href="#welcome" aria-label="Cuộn xuống phần lời chúc">
+          <span class="scroll-cue__label micro">cuộn xuống</span>
+          <span class="scroll-cue__track" aria-hidden="true"><span></span></span>
+        </a>
+        <span class="hero__side micro">For Giang, always</span>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────  WELCOME  ─────────────────────────── -->
+    <section class="welcome" id="welcome" aria-labelledby="welcomeTitle">
+      <div class="welcome__glow" aria-hidden="true"></div>
+      <span class="ghost-numeral" aria-hidden="true">20.10</span>
+
+      <div class="wrap">
+        <header class="welcome__head">
+          <p class="eyebrow" data-reveal>01 — HAPPY VIETNAMESE WOMEN’S DAY</p>
+          <div class="welcome__title-row">
+            <h2 class="welcome__title" id="welcomeTitle" data-lines>
+              <span class="line"><span>Chúc mừng ngày</span></span>
+              <span class="line"><span><em>20 tháng 10,</em></span></span>
+              <span class="line"><span>Giang <span class="heart">♡</span></span></span>
+            </h2>
+            <p class="welcome__script script" data-reveal style="--delay:.4s">hôm nay, thế giới dịu dàng hơn một chút</p>
+          </div>
+        </header>
+
+        <div class="welcome__grid">
+          <figure class="editorial-photo" data-reveal>
+            <div class="editorial-photo__mat">
+              <div class="editorial-photo__image">
+                <picture>
+                  <source type="image/webp"
+                          srcset="assets/roses-duo-portrait-600.webp 600w, assets/roses-duo-portrait.webp 1000w"
+                          sizes="(max-width: 860px) 86vw, 42vw" />
+                  <img src="assets/roses-duo-portrait.jpg"
+                       srcset="assets/roses-duo-portrait-600.jpg 600w, assets/roses-duo-portrait.jpg 1000w"
+                       sizes="(max-width: 860px) 86vw, 42vw" width="1000" height="1250"
+                       alt="Hai bông hồng phấn nở giữa khu vườn xanh" loading="lazy" decoding="async"
+                       data-parallax="0.05" />
+                </picture>
+              </div>
+            </div>
+            <figcaption>
+              <span>vài bông hồng nhỏ, gửi riêng Giang</span>
+              <span class="editorial-photo__date">20 · 10</span>
+            </figcaption>
+            <span class="editorial-photo__tag script" aria-hidden="true">dịu dàng</span>
+          </figure>
+
+          <div class="welcome__copy">
+            <p class="welcome__hello script" data-reveal>Chào Giang,</p>
+            <p data-reveal style="--delay:.08s">Hôm nay là một ngày đặc biệt, và Cường muốn dành một chút thời gian để gửi đến Giang những lời chúc thật đẹp.</p>
+            <p data-reveal style="--delay:.16s">Cường không biết món quà nhỏ này có làm Giang bất ngờ không, nhưng Cường hy vọng khi mở nó ra, Giang sẽ mỉm cười một chút.</p>
+            <div class="welcome__sign" data-reveal style="--delay:.24s">
+              <span class="welcome__sign-line" aria-hidden="true"></span>
+              <span class="micro">viết cho Giang, ngày 20 · 10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────  GALLERY  ──────────────────────────── -->
+    <section class="gallery" id="gallery" aria-labelledby="galleryTitle">
+      <div class="gallery__glow" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <header class="section-head section-head--center gallery__head">
+          <p class="eyebrow" data-reveal>A LITTLE COLLECTION OF BEAUTIFUL MOMENTS</p>
+          <h2 class="gallery__title" id="galleryTitle" data-lines>
+            <span class="line"><span>Góc nhỏ dành cho</span></span>
+            <span class="line"><span><em>Giang</em> <span class="heart">♡</span></span></span>
+          </h2>
+          <p class="section-sub" data-reveal>Có những điều chẳng cần lời nói nào để trở nên đặc biệt. Đôi khi, chỉ một khoảnh khắc thôi cũng đủ khiến người ta muốn lưu giữ thật lâu.</p>
+        </header>
+
+        <div class="gallery__spread">
+          <span class="gallery__vertical micro" aria-hidden="true">beautiful moments · 20.10</span>
+
+          <figure class="gallery-main" data-reveal>
+            <div class="gallery-main__frame">
+              <span class="gallery-main__aura" data-parallax="0.04" aria-hidden="true"><span></span></span>
+
+              <div class="gallery-main__mat">
+                <div class="gallery-main__image"
+                     data-gallery-main="public/images/giang-main.jpg"
+                     data-gallery-title="For someone special, Giang.">
+                  <img class="gallery-main__img"
+                       alt=""
+                       width="1000" height="1250"
+                       loading="lazy" decoding="async" data-gallery-img />
+
+                  <div class="gallery-main__placeholder">
+                    <span class="gallery-main__monogram script" aria-hidden="true">G</span>
+                    <span class="gallery-main__placeholder-rule" aria-hidden="true"></span>
+                    <span class="gallery-main__placeholder-text">A special place for Giang’s photo</span>
+                    <span class="gallery-main__placeholder-heart" aria-hidden="true">♡</span>
+                  </div>
+
+                  <button class="gallery-main__zoom" type="button" data-gallery-open aria-label="Xem ảnh lớn của Giang">
+                    <span aria-hidden="true">↗</span>
+                    <span class="gallery-main__zoom-text">xem ảnh</span>
+                  </button>
+
+                  <span class="gallery-main__corner" aria-hidden="true">♡</span>
+                </div>
+              </div>
+            </div>
+
+            <figcaption class="gallery-main__caption">
+              <span class="script">For someone special, Giang.</span>
+              <span class="micro">a moment kept · 20 · 10</span>
+            </figcaption>
+          </figure>
+
+          <aside class="gallery-note" data-reveal style="--delay:.12s">
+            <span class="gallery-note__quote" aria-hidden="true">“</span>
+            <p class="gallery-note__text">Giang à, mong rằng khi nhìn lại những khoảnh khắc đẹp của mình, Giang sẽ luôn nhớ rằng bản thân xứng đáng với thật nhiều niềm vui, yêu thương và những điều tử tế.</p>
+            <span class="gallery-note__rule" aria-hidden="true"></span>
+            <p class="gallery-note__en script">Some moments deserve to be kept forever. <span class="heart">♡</span></p>
+            <span class="gallery-note__sign micro">— một góc nhỏ, giữ thật lâu</span>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────  WISHES  ──────────────────────────── -->
+    <section class="wishes" id="wishes" aria-labelledby="wishesTitle">
+      <header class="section-head section-head--center wrap">
+        <p class="eyebrow" data-reveal>02 — LITTLE WISHES FOR YOU</p>
+        <h2 class="display wishes__title" id="wishesTitle" data-lines>
+          <span class="line"><span>Little <em>wishes</em></span></span>
+          <span class="line"><span>for you <span class="wishes__for script">♡</span></span></span>
+        </h2>
+        <p class="section-sub" data-reveal>Bốn lời chúc nhỏ xíu, Cường gói lại cẩn thận và để dành riêng cho Giang.</p>
+      </header>
+
+      <!-- Wish 01 — a note on paper -->
+      <article class="wish wish--paper">
+        <div class="wrap">
+          <div class="paper-note" data-reveal>
+            <div class="paper-note__top">
+              <span class="micro">No. 01</span>
+              <span class="script">cho Giang, với tất cả sự dịu dàng</span>
+            </div>
+            <span class="paper-note__quote" aria-hidden="true">“</span>
+            <p class="paper-note__text">Chúc Giang có một ngày lễ 20/10 thật trọn vẹn, ngập tràn yêu thương và những điều ý nghĩa nhất.</p>
+            <div class="paper-note__foot" aria-hidden="true">
+              <span class="hairline"></span>
+              <span class="heart">♡</span>
+              <span class="hairline"></span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Wish 02 — with a rose -->
+      <article class="wish wish--split">
+        <div class="wrap wish-split">
+          <figure class="framed-photo" data-reveal>
+            <div class="framed-photo__mat">
+              <picture>
+                <source type="image/webp"
+                        srcset="assets/rose-close-600.webp 600w, assets/rose-close-900.webp 900w, assets/rose-close.webp 1200w"
+                        sizes="(max-width: 860px) 82vw, 40vw" />
+                <img src="assets/rose-close.jpg"
+                     srcset="assets/rose-close-600.jpg 600w, assets/rose-close-900.jpg 900w, assets/rose-close.jpg 1200w"
+                     sizes="(max-width: 860px) 82vw, 40vw" width="1200" height="1600"
+                     alt="Cận cảnh những cánh hồng phấn mềm mại" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <figcaption>
+              <span class="micro">một chút hồng</span>
+              <span class="script">cho những ngày cần dịu dàng</span>
+            </figcaption>
+          </figure>
+
+          <div class="wish-split__copy">
+            <span class="wish__numeral" aria-hidden="true">02</span>
+            <p class="wish-kicker" data-reveal>for all the good things ahead</p>
+            <p class="wish-split__quote" data-reveal style="--delay:.08s">Chúc Giang ngày càng xinh đẹp, giỏi giang, gặp nhiều điều tốt lành và luôn đạt được những gì mình mong muốn.</p>
+            <p class="script wish-split__script" data-reveal style="--delay:.16s">rạng rỡ và thật nhiều điều tốt lành</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Wish 03 — a pause in wine -->
+      <article class="wish wish--wine">
+        <div class="wish-wine__bg" aria-hidden="true">
+          <picture>
+            <source type="image/webp" srcset="assets/rose-muted-700.webp 700w, assets/rose-muted-1100.webp 1100w, assets/rose-muted.webp 1400w" sizes="100vw" />
+            <img src="assets/rose-muted.jpg" srcset="assets/rose-muted-700.jpg 700w, assets/rose-muted-1100.jpg 1100w, assets/rose-muted.jpg 1400w" sizes="100vw" width="1400" height="931" alt="" loading="lazy" decoding="async" />
+          </picture>
+        </div>
+        <span class="wish-wine__num" aria-hidden="true">03</span>
+        <span class="wish-wine__star" aria-hidden="true">✦</span>
+        <div class="wrap wish-wine__inner">
+          <p class="eyebrow eyebrow--light" data-reveal>03 — FOR YOUR EVERY DAY</p>
+          <blockquote class="wish-wine__quote" data-reveal style="--delay:.08s">Mong Giang luôn được yêu thương, trân trọng. Cuộc sống không còn những muộn phiền và mỗi ngày trôi qua đều bình an và hạnh phúc.</blockquote>
+          <p class="script wish-wine__script" data-reveal style="--delay:.16s">bình an · trọn vẹn · hạnh phúc</p>
+        </div>
+      </article>
+
+      <!-- Wish 04 — room to breathe -->
+      <article class="wish wish--quiet">
+        <span class="wish-quiet__watermark script" aria-hidden="true">dịu dàng</span>
+        <div class="wrap wish-quiet__inner">
+          <p class="eyebrow" data-reveal>04 — THE ONE I MEAN THE MOST</p>
+          <p class="wish-quiet__text" data-reveal style="--delay:.08s">Mong rằng sau này mình sẽ là 1 phần trong cuộc sống của nhau ☘️</p>
+          <span class="wish-quiet__ornament" aria-hidden="true">♡</span>
+          <p class="script wish-quiet__script" data-reveal style="--delay:.16s">một lời chúc nhỏ, giữ thật lâu</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ───────────────────────────  OPEN WHEN  ─────────────────────────── -->
+    <section class="open-when" id="open-when" aria-labelledby="openTitle">
+      <div class="open-when__glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <header class="section-head section-head--center">
+          <p class="eyebrow" data-reveal>03 — OPEN WHEN YOU SMILE</p>
+          <h2 class="display display--center" id="openTitle" data-lines>
+            <span class="line"><span>Open when</span></span>
+            <span class="line"><span><em>you smile.</em></span></span>
+          </h2>
+          <p class="open-when__sub" data-reveal>Có vài điều nhỏ xíu Cường muốn nhắn Giang...</p>
+        </header>
+
+        <div class="envelopes">
+          <button class="envelope" type="button" data-letter="letter-tired" aria-haspopup="dialog" aria-label="Mở lá thư: Dành cho những ngày Giang mệt" style="--tilt:-2.2deg; --delay:.05s">
+            <span class="envelope__body" aria-hidden="true">
+              <span class="envelope__pocket envelope__pocket--left"></span>
+              <span class="envelope__pocket envelope__pocket--right"></span>
+              <span class="envelope__pocket envelope__pocket--bottom"></span>
+              <span class="envelope__label">
+                <span class="envelope__no">No. 01</span>
+                <span class="envelope__title">Dành cho những ngày Giang mệt</span>
+                <span class="envelope__hint">mở lá thư <span aria-hidden="true">↗</span></span>
+              </span>
+              <span class="envelope__flap"></span>
+              <span class="envelope__seal"><span>G</span></span>
+            </span>
+          </button>
+
+          <button class="envelope" type="button" data-letter="letter-forget" aria-haspopup="dialog" aria-label="Mở lá thư: Dành cho những lúc Giang quên mất mình tuyệt vời thế nào" style="--tilt:1.6deg; --delay:.15s">
+            <span class="envelope__body" aria-hidden="true">
+              <span class="envelope__pocket envelope__pocket--left"></span>
+              <span class="envelope__pocket envelope__pocket--right"></span>
+              <span class="envelope__pocket envelope__pocket--bottom"></span>
+              <span class="envelope__label">
+                <span class="envelope__no">No. 02</span>
+                <span class="envelope__title">Dành cho những lúc Giang quên mất mình tuyệt vời thế nào</span>
+                <span class="envelope__hint">mở lá thư <span aria-hidden="true">↗</span></span>
+              </span>
+              <span class="envelope__flap"></span>
+              <span class="envelope__seal"><span>G</span></span>
+            </span>
+          </button>
+
+          <button class="envelope" type="button" data-letter="letter-happy" aria-haspopup="dialog" aria-label="Mở lá thư: Dành cho một ngày thật vui" style="--tilt:-1.3deg; --delay:.25s">
+            <span class="envelope__body" aria-hidden="true">
+              <span class="envelope__pocket envelope__pocket--left"></span>
+              <span class="envelope__pocket envelope__pocket--right"></span>
+              <span class="envelope__pocket envelope__pocket--bottom"></span>
+              <span class="envelope__label">
+                <span class="envelope__no">No. 03</span>
+                <span class="envelope__title">Dành cho một ngày thật vui</span>
+                <span class="envelope__hint">mở lá thư <span aria-hidden="true">↗</span></span>
+              </span>
+              <span class="envelope__flap"></span>
+              <span class="envelope__seal"><span>G</span></span>
+            </span>
+          </button>
+        </div>
+        <p class="open-when__hint micro" data-reveal>chạm vào một phong thư để mở nhé</p>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────  LETTER  ──────────────────────────── -->
+    <section class="letter-section" id="letter" aria-labelledby="letterTitle">
+      <div class="letter-section__bg" aria-hidden="true">
+        <img src="assets/rose-muted.webp" width="1400" height="931" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="letter-section__stars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="wrap letter-section__inner">
+        <header class="section-head section-head--center section-head--onwine">
+          <p class="eyebrow eyebrow--light" data-reveal>04 — A LETTER FOR GIANG</p>
+          <h2 class="display display--center display--ivory" id="letterTitle" data-lines>
+            <span class="line"><span>A letter</span></span>
+            <span class="line"><span><em>for Giang.</em></span></span>
+          </h2>
+          <p class="section-sub section-sub--light" data-reveal>Điều cuối cùng, cũng là điều Cường muốn nói nhất.</p>
+        </header>
+
+        <article class="love-letter" id="loveLetter">
+          <div class="love-letter__paper">
+            <header class="love-letter__head">
+              <span class="monogram monogram--small" aria-hidden="true">G</span>
+              <span class="love-letter__head-label micro">Một lá thư nhỏ</span>
+              <span class="micro">20 · 10 · 2026</span>
+            </header>
+
+            <div class="love-letter__stage">
+              <div class="love-letter__sealed" id="letterSealed">
+                <span class="love-letter__to script">gửi Giang,</span>
+                <p class="love-letter__invite">Có một lá thư nhỏ đang chờ Giang mở.</p>
+                <button class="wax-seal" id="sealButton" type="button" aria-expanded="false" aria-controls="letterBody" aria-label="Mở lá thư của Giang">
+                  <span class="wax-seal__disc" aria-hidden="true">G</span>
+                  <span class="wax-seal__ring" aria-hidden="true"></span>
+                </button>
+                <span class="wax-seal__hint micro" aria-hidden="true">chạm vào con dấu để mở</span>
+                <span class="love-letter__seal-date micro" aria-hidden="true">20 · 10</span>
+              </div>
+
+              <div class="love-letter__body" id="letterBody" aria-hidden="true">
+                <p class="salutation">Giang thân mến,</p>
+                <p>Nếu Giang đang đọc những dòng này, thì có lẽ món quà nhỏ này đã tìm được đến Giang rồi.</p>
+                <p>Cường không biết phải bắt đầu từ đâu. Cường chỉ biết rằng, giữa rất nhiều điều đang diễn ra ngoài kia, Cường muốn dành một khoảng lặng nhỏ — đủ dịu dàng và đủ riêng — để nhắc Giang rằng <em>Giang quan trọng</em>.</p>
+                <p>Có thể hôm nay Giang đang vui, cũng có thể chỉ là một ngày bình thường. Dù là thế nào, Cường mong Giang nhớ: Giang không cần phải trở nên hoàn hảo để được yêu thương. Giang chỉ cần là Giang thôi, và điều đó đã là một điều rất đẹp rồi.</p>
+                <p>Cảm ơn Giang vì những ngày Giang đã lặng lẽ cố gắng, vì những lần Giang vẫn chọn mỉm cười, và vì đã là chính Giang.</p>
+                <p>Mong thế giới này sẽ đối xử với Giang bằng tất cả sự dịu dàng mà Giang xứng đáng có. Và nếu có những ngày thế giới ấy quên mất, mong Giang nhớ rằng vẫn có một người từng làm một món quà nhỏ như thế này, chỉ để Giang biết mình được trân trọng.</p>
+                <p class="letter-close">20/10 vui vẻ nhé, Giang.</p>
+                <p class="letter-sign script">Thương Giang,<br><span>Cường.</span></p>
+                <p class="letter-ps">— người luôn mong Giang hạnh phúc.</p>
+              </div>
+            </div>
+          </div>
+          <p class="love-letter__footnote micro" aria-hidden="true">sealed with tenderness · only for you</p>
+        </article>
+        <p class="sr-only" id="sealStatus" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ────────────────────────────  FINALE  ──────────────────────────── -->
+    <section class="finale" id="finale" aria-labelledby="finaleTitle">
+      <div class="finale__bg" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="assets/hero-sky-800.webp 800w, assets/hero-sky-1200.webp 1200w, assets/hero-sky.webp 1600w" sizes="100vw" />
+          <img src="assets/hero-sky.jpg" width="1600" height="2402" alt="" loading="lazy" decoding="async" />
+        </picture>
+      </div>
+      <div class="finale__veil" aria-hidden="true"></div>
+      <div class="finale__bokeh" aria-hidden="true"><span></span><span></span><span></span></div>
+
+      <div class="wrap finale__inner">
+        <p class="eyebrow eyebrow--gold" data-reveal>05 — THE LITTLE WORLD</p>
+        <h2 class="finale__quote" id="finaleTitle" data-lines>
+          <span class="line"><span>Thế giới ngoài kia có thể rất rộng,</span></span>
+          <span class="line"><span>nhưng hôm nay Cường muốn dành riêng</span></span>
+          <span class="line"><span>một góc nhỏ thật dịu dàng</span></span>
+          <span class="line"><span>cho Giang — <em class="gold-italic">chỉ Giang thôi.</em></span></span>
+        </h2>
+        <div class="finale__sig" data-reveal style="--delay:.2s">
+          <span class="script">happy Vietnamese Women’s Day</span>
+          <span class="finale__date" aria-hidden="true">20 · 10</span>
+        </div>
+        <a class="back-top" href="#top" data-back-top data-reveal style="--delay:.3s">
+          <span class="back-top__circle" aria-hidden="true">↑</span>
+          <span>Về lại nơi bắt đầu</span>
+        </a>
+      </div>
+
+      <footer class="site-footer wrap">
+        <span>A little world for Giang</span>
+        <span class="site-footer__heart" aria-hidden="true">♡</span>
+        <span>Made with tenderness · 20.10</span>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ─────────────────────────  LETTER DIALOG  ───────────────────────── -->
+  <dialog class="letter-dialog" id="letterDialog" aria-labelledby="dialogTitle">
+    <div class="letter-dialog__stage">
+      <div class="letter-dialog__envelope" aria-hidden="true">
+        <span class="letter-dialog__pocket"></span>
+        <span class="letter-dialog__flap"></span>
+      </div>
+
+      <article class="dialog-sheet">
+        <div class="dialog-sheet__scroll">
+          <header class="dialog-sheet__head">
+            <span class="monogram monogram--small" aria-hidden="true">G</span>
+            <span class="micro">a little letter · 20 · 10</span>
+          </header>
+          <div id="dialogContent"></div>
+          <button class="dialog-sheet__close-text" type="button" data-dialog-close>Đóng lại <span aria-hidden="true">↩</span></button>
+        </div>
+      </article>
+
+      <button class="dialog-close" type="button" data-dialog-close aria-label="Đóng lá thư">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- ─────────────────────────  GALLERY LIGHTBOX  ───────────────────────── -->
+  <dialog class="gallery-dialog" id="galleryDialog" aria-label="Xem ảnh của Giang">
+    <div class="gallery-dialog__stage">
+      <button class="gallery-dialog__close" type="button" data-gallery-close aria-label="Đóng ảnh">
+        <span aria-hidden="true">×</span>
+      </button>
+
+      <figure class="gallery-dialog__figure">
+        <div class="gallery-dialog__mat">
+          <img class="gallery-dialog__img" alt="" width="1000" height="1250" data-gallery-lightbox-img />
+        </div>
+        <figcaption class="gallery-dialog__caption">
+          <span class="script" data-gallery-lightbox-cap></span>
+          <span class="micro" data-gallery-lightbox-count aria-live="polite"></span>
+        </figcaption>
+      </figure>
+
+      <button class="gallery-dialog__nav gallery-dialog__nav--prev" type="button" data-gallery-prev aria-label="Ảnh trước" hidden>
+        <span aria-hidden="true">←</span>
+      </button>
+      <button class="gallery-dialog__nav gallery-dialog__nav--next" type="button" data-gallery-next aria-label="Ảnh sau" hidden>
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </dialog>
+
+  <template id="letter-tired">
+    <p class="dialog-eyebrow">No. 01 · open when you’re tired</p>
+    <h3 class="dialog-title" id="dialogTitle">Dành cho những ngày Giang mệt</h3>
+    <div class="dialog-rule" aria-hidden="true"><span></span><span class="heart">♡</span><span></span></div>
+    <p class="dialog-body">Giang không cần lúc nào cũng phải mạnh mẽ đâu. Có những ngày chỉ cần nghỉ ngơi, hít thở thật sâu và cho bản thân một chút dịu dàng cũng đã là đủ rồi.</p>
+    <p class="dialog-sign script">— hít thở thật sâu nhé, rồi mọi chuyện sẽ dịu lại.</p>
+    <span class="dialog-seal" aria-hidden="true">G</span>
+  </template>
+
+  <template id="letter-forget">
+    <p class="dialog-eyebrow">No. 02 · open when you forget</p>
+    <h3 class="dialog-title" id="dialogTitle">Dành cho những lúc Giang quên mất mình tuyệt vời thế nào</h3>
+    <div class="dialog-rule" aria-hidden="true"><span></span><span class="heart">♡</span><span></span></div>
+    <p class="dialog-body">Giang à, đừng vì một ngày không tốt mà nghĩ rằng bản thân không đủ tốt. Giang vẫn có giá trị, vẫn xứng đáng được yêu thương và vẫn có những điều đẹp đẽ đang chờ phía trước.</p>
+    <p class="dialog-sign script">— Giang tốt hơn những gì Giang vẫn nghĩ rất nhiều.</p>
+    <span class="dialog-seal" aria-hidden="true">G</span>
+  </template>
+
+  <template id="letter-happy">
+    <p class="dialog-eyebrow">No. 03 · open when you’re happy</p>
+    <h3 class="dialog-title" id="dialogTitle">Dành cho một ngày thật vui</h3>
+    <div class="dialog-rule" aria-hidden="true"><span></span><span class="heart">♡</span><span></span></div>
+    <p class="dialog-body">Nếu hôm nay Giang đang vui, hãy cứ vui thật nhiều nhé. Mong niềm vui ấy sẽ ở lại lâu hơn một chút và những điều dễ thương sẽ tìm đến Giang nhiều hơn một chút.</p>
+    <p class="dialog-sign script">— mong niềm vui này ở lại với Giang thật lâu.</p>
+    <span class="dialog-seal" aria-hidden="true">G</span>
+  </template>
+
+  <noscript>
+    <style>
+      [data-reveal], [data-lines] .line > span { opacity: 1 !important; transform: none !important; filter: none !important; }
+      .hero__letter { opacity: 1 !important; animation: none !important; }
+      .love-letter__sealed { display: none !important; }
+      .love-letter__body { max-height: none !important; opacity: 1 !important; visibility: visible !important; }
+      .chapter-rail, .petals, .letter-dialog { display: none !important; }
+      .hero__flourish path { stroke-dashoffset: 0 !important; }
+    </style>
+  </noscript>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
