@@ -1097,6 +1097,48 @@
     }
   }
 
+  /* ───────────────────────  PHOTO SWAPS (Giang)  ─────────────────────── */
+
+  // Thay ảnh hoa bằng ảnh của Giang khi file tồn tại; giữ ảnh hoa làm mặc định.
+  function initPhotoSwaps() {
+    const slots = Array.from(doc.querySelectorAll('[data-user-photo]'));
+    if (!slots.length) return;
+
+    const fileScheme = window.location.protocol === 'file:';
+
+    async function exists(src) {
+      if (!src) return false;
+      if (fileScheme) return true;
+      try {
+        const response = await fetch(src, { method: 'HEAD', cache: 'no-store' });
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    for (const img of slots) {
+      const target = img.dataset.userPhoto;
+      if (!target) continue;
+
+      exists(target).then((ok) => {
+        if (!ok) return;
+
+        const picture = img.closest('picture');
+        if (picture) {
+          picture.querySelectorAll('source').forEach((source) => source.remove());
+        }
+
+        img.setAttribute('src', target);
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+
+        const alt = img.dataset.userAlt;
+        if (alt) img.setAttribute('alt', alt);
+      });
+    }
+  }
+
   /* ────────────────────────────  SEAL  ──────────────────────────── */
 
   function initSeal() {
@@ -1209,6 +1251,7 @@
     initReveals();
     initGift();
     initGallery();
+    initPhotoSwaps();
     initDialog();
     initSeal();
     initMotionPreference();

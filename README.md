@@ -21,15 +21,20 @@ Sau đó mở <http://127.0.0.1:8123/>.
 
 ## Thêm ảnh của Giang
 
-1. Thả **một** ảnh vào `public/images/` với tên `giang-main.jpg`
-   (4:5 dọc, khuyến nghị ~1200 × 1500px).
-2. Tải lại trang — ảnh sẽ hiện trong khung lớn giữa gallery.
-3. Nếu ảnh bị cắt lệch khuôn mặt, chỉnh `--gallery-pos` cho `.gallery-main__image`
-   trong `css/style.css` (ví dụ `--gallery-pos: 50% 25%;`).
+Thả ảnh vào `public/images/` với đúng tên:
 
-Khi chưa có ảnh, khung lớn hiển thị placeholder nghệ thuật
-"A special place for Giang’s photo" và nút xem ảnh lớn tự ẩn. Bấm vào ảnh để mở
-toàn màn hình (đóng bằng nút × hoặc phím Esc).
+| File | Xuất hiện ở đâu | Gợi ý |
+| --- | --- | --- |
+| `giang-main.jpg` | Khung lớn giữa gallery | 4:5 dọc, ~1200 × 1500px |
+| `giang-01.jpg` | Thay ảnh hồng ở phần lời chào 20·10 | 4:5 dọc |
+| `giang-02.jpg` | Thay ảnh hồng ở lời chúc 02 | 4:5 dọc |
+
+- File nào chưa có thì vị trí đó vẫn hiện ảnh hoa gốc (hoặc placeholder ở gallery),
+  không bị ảnh vỡ — nên bạn cứ thả dần từng ảnh cũng được.
+- Nếu ảnh bị cắt lệch khuôn mặt:
+  - Gallery: chỉnh `--gallery-pos` cho `.gallery-main__image` trong `css/style.css`.
+  - Lời chào: chỉnh `object-position` cho `.editorial-photo__image img`.
+  - Lời chúc 02: chỉnh `object-position` cho `.framed-photo img`.
 
 Chi tiết hơn: [`public/images/README.md`](public/images/README.md).
 
